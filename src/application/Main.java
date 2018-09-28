@@ -15,7 +15,6 @@ import javafx.scene.text.Font;
 
 /**
  * Formelrad Applicationasdasd
- * @author Peter Rutschmann
  * @version 13.09.2018
  */
 public class Main extends Application {
