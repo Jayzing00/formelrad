@@ -59,13 +59,16 @@ public class Calculator {
 	public double pAusUundR(double u, double r) {
 		return Math.pow(u,2)/r;
 	}
-	
-	public double pAusUundI(double u, double i) {
-		return u*i;
-	}
-	
-	public double pAusRundI(double r, double i) {
-		return r*Math.pow(i,2);
+		
+	public double uAusRundI(double r, double i) {
+		return r * i;
 	}
 
+	public double uAusPundI(double p, double i) {
+		return p / i;
+	}
+
+	public double uAusPundr(double p, double r) {
+		return Math.sqrt(p * r);
+	}
 }
