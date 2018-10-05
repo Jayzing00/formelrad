@@ -2,7 +2,7 @@ package application;
 
 /**
  * Berechnet das Formelrad
- * @version 13.09.2018
+ * @version 05.10.2018
  */
 public class Calculator {
 	private double leistung;
@@ -48,7 +48,8 @@ public class Calculator {
 		 */
 	}
 	
-	/* Hier die Methoden mit den Formlen hinzufügen
-	 */
-	
+	public double pAusUundI(double u, double i) {
+		return u*i;
+	}
+
 }
