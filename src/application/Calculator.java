@@ -44,10 +44,12 @@ public class Calculator {
 	public void calculate() {
 		
 		if (leistung != 0 && spannung != 0) {
-			
+			strom = iAusPundU(leistung, spannung);
+			widerstand = rAusPundI(leistung, spannung);
 		}
 		if (leistung != 0 && strom != 0) {
-			
+			spannung = uAusPundI(leistung, strom);
+			widerstand = rAusPundI(leistung, strom);
 		}
 		if (leistung != 0 && widerstand != 0) {
 			
