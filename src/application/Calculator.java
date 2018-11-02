@@ -10,9 +10,24 @@ public class Calculator {
 	private double spannung;
 	private double strom;
 	private double widerstand;
+	private String warning;
 
 	public Calculator(double leistung, double spannung, double strom, double widerstand) {
 		super();
+		int cnt = 0;
+		if (leistung != 0) 
+			cnt++;
+		if (spannung != 0) 
+			cnt++;
+		if (strom != 0) 
+			cnt++;
+		if (widerstand != 0) 
+			cnt++;
+		if (cnt<2)
+			warning = "nicht genug Werte";
+		else if (cnt>2)
+			warning = "zu viele Werte eingegeben";
+		
 		this.leistung = leistung;
 		this.spannung = spannung;
 		this.strom = strom;
@@ -42,7 +57,6 @@ public class Calculator {
 	}
 
 	public void calculate() {
-		
 		if (leistung != 0 && spannung != 0) {
 			strom = iAusPundU(leistung, spannung);
 			widerstand = rAusPundI(leistung, spannung);
@@ -115,6 +129,10 @@ public class Calculator {
 	}
 	public double rAusPundU(double p, double u) {
 		return (u*u)/p;
+	}
+
+	public String getWarning() {
+		return warning;
 	}
 
 }

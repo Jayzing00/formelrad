@@ -78,6 +78,11 @@ public class Main extends Application {
 			btnBerechnen.setText("Berechnen");
 			root.getChildren().add(btnBerechnen);
 			
+			Label lblWarning = new Label("");
+			lblWarning.relocate(10, 485);
+			lblWarning.setFont(Font.font(15));
+			root.getChildren().add(lblWarning);
+			
 			btnBerechnen.setOnAction(e -> {
 				Calculator myCalculator = new Calculator(
 						Double.parseDouble("0"+txLeistung.getText()),
@@ -89,14 +94,15 @@ public class Main extends Application {
 				myCalculator.calculate();
 				System.out.print("Nachher: ");
 				System.out.println(myCalculator.toString());
-					
+				
 				txLeistung.setText((Double.toString(Math.round(myCalculator.getLeistung()*1000.0)/1000.0)));
 				txSpannung.setText(Double.toString(Math.round(myCalculator.getSpannung()*1000.0)/1000.0));
 				txStrom.setText(Double.toString(Math.round(myCalculator.getStrom()*1000.0)/1000.0));
 				txWiderstand.setText(Double.toString(Math.round(myCalculator.getWiderstand()*1000.0)/1000.0));
+				lblWarning.setText(myCalculator.getWarning());
 			});
 
-			Scene scene = new Scene(root, 330, 490);
+			Scene scene = new Scene(root, 330, 530);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Formelrad");
