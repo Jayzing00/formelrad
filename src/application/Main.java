@@ -80,20 +80,20 @@ public class Main extends Application {
 			
 			btnBerechnen.setOnAction(e -> {
 				Calculator myCalculator = new Calculator(
-						Double.parseDouble(txLeistung.getText()),
-						Double.parseDouble(txSpannung.getText()),
-						Double.parseDouble(txStrom.getText()),
-						Double.parseDouble(txWiderstand.getText()));
+						Double.parseDouble("0"+txLeistung.getText()),
+						Double.parseDouble("0"+txSpannung.getText()),
+						Double.parseDouble("0"+txStrom.getText()),
+						Double.parseDouble("0"+txWiderstand.getText()));
 				System.out.print("Vorher:  ");
 				System.out.println(myCalculator.toString());
 				myCalculator.calculate();
 				System.out.print("Nachher: ");
 				System.out.println(myCalculator.toString());
 					
-				txLeistung.setText(Double.toString(myCalculator.getLeistung()));
-				txSpannung.setText(Double.toString(myCalculator.getSpannung()));
-				txStrom.setText(Double.toString(myCalculator.getStrom()));
-				txWiderstand.setText(Double.toString(myCalculator.getWiderstand()));
+				txLeistung.setText((Double.toString(Math.round(myCalculator.getLeistung()*1000.0)/1000.0)));
+				txSpannung.setText(Double.toString(Math.round(myCalculator.getSpannung()*1000.0)/1000.0));
+				txStrom.setText(Double.toString(Math.round(myCalculator.getStrom()*1000.0)/1000.0));
+				txWiderstand.setText(Double.toString(Math.round(myCalculator.getWiderstand()*1000.0)/1000.0));
 			});
 
 			Scene scene = new Scene(root, 330, 490);
