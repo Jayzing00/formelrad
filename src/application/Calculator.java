@@ -62,28 +62,28 @@ public class Calculator {
 
 	public void calculate() {
 		if (leistung != 0 && spannung != 0) {
-			strom = iAusPundU(leistung, spannung);
-			widerstand = rAusPundI(leistung, spannung);
+			strom = iAusPundU(leistung, spannung) * -1;
+			widerstand = rAusPundI(leistung, spannung) * -1;
 		}else
 		if (leistung != 0 && strom != 0) {
-			spannung = uAusPundI(leistung, strom);
-			widerstand = rAusPundI(leistung, strom);
+			spannung = uAusPundI(leistung, strom) * -1;
+			widerstand = rAusPundI(leistung, strom) * -1;
 		}else
 		if (leistung != 0 && widerstand != 0) {
-			spannung = uAusPundR(leistung, widerstand);
-			strom = iAusPundR(leistung, widerstand);
+			spannung = uAusPundR(leistung, widerstand) * -1;
+			strom = iAusPundR(leistung, widerstand) * -1;
 		}else
 		if (spannung != 0 && strom != 0) {
-			leistung = pAusUundI(spannung, strom);
-			widerstand = rAusUundI(spannung, strom);
+			leistung = pAusUundI(spannung, strom) * -1;
+			widerstand = rAusUundI(spannung, strom) * -1;
 		}else
 		if (spannung != 0 && widerstand != 0) {
-			leistung = pAusUundR(spannung, widerstand);
-			strom = iAusUundR(spannung, widerstand);
+			leistung = pAusUundR(spannung, widerstand) * -1;
+			strom = iAusUundR(spannung, widerstand) * -1;
 		}else
 		if (widerstand != 0 && strom != 0) {
-			leistung = pAusRundI(widerstand, strom);
-			spannung = uAusRundI(widerstand, strom);
+			leistung = pAusRundI(widerstand, strom) * -1;
+			spannung = uAusRundI(widerstand, strom) * -1;
 		}
 
 	}
