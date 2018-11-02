@@ -2,7 +2,7 @@ package application;
 
 /**
  * Berechnet das Formelrad
- * 
+ *
  * @version 05.10.2018
  */
 public class Calculator {
@@ -15,23 +15,27 @@ public class Calculator {
 	public Calculator(double leistung, double spannung, double strom, double widerstand) {
 		super();
 		int cnt = 0;
-		if (leistung != 0) 
+		if (leistung != 0)
 			cnt++;
-		if (spannung != 0) 
+		if (spannung != 0)
 			cnt++;
-		if (strom != 0) 
+		if (strom != 0)
 			cnt++;
-		if (widerstand != 0) 
+		if (widerstand != 0)
 			cnt++;
 		if (cnt<2)
 			warning = "nicht genug Werte";
 		else if (cnt>2)
 			warning = "zu viele Werte eingegeben";
-		
+		else
+			warning = "";
+
+		if (warning.equals("")) {
 		this.leistung = leistung;
 		this.spannung = spannung;
 		this.strom = strom;
 		this.widerstand = widerstand;
+		}
 	}
 
 	public double getLeistung() {
@@ -60,28 +64,28 @@ public class Calculator {
 		if (leistung != 0 && spannung != 0) {
 			strom = iAusPundU(leistung, spannung);
 			widerstand = rAusPundI(leistung, spannung);
-		}
+		}else
 		if (leistung != 0 && strom != 0) {
 			spannung = uAusPundI(leistung, strom);
 			widerstand = rAusPundI(leistung, strom);
-		}
+		}else
 		if (leistung != 0 && widerstand != 0) {
 			spannung = uAusPundR(leistung, widerstand);
 			strom = iAusPundR(leistung, widerstand);
-		}
+		}else
 		if (spannung != 0 && strom != 0) {
 			leistung = pAusUundI(spannung, strom);
 			widerstand = rAusUundI(spannung, strom);
-		}
+		}else
 		if (spannung != 0 && widerstand != 0) {
 			leistung = pAusUundR(spannung, widerstand);
 			strom = iAusUundR(spannung, widerstand);
-		}
+		}else
 		if (widerstand != 0 && strom != 0) {
 			leistung = pAusRundI(widerstand, strom);
 			spannung = uAusRundI(widerstand, strom);
 		}
-		
+
 	}
 
 	public double pAusUundI(double u, double i) {
@@ -119,7 +123,7 @@ public class Calculator {
 	public double iAusUundR(double u, double r) {
 		return u / r;
 	}
-	
+
 	public double rAusUundI(double u, double i) {
 		return u/i;
 	}
