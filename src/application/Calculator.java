@@ -54,16 +54,19 @@ public class Calculator {
 		return widerstand;
 	}
 
-	@Override
-	public String toString() {
-		return "Calculator [leistung=" + leistung + ", spannung=" + spannung + ", strom=" + strom + ", widerstand="
-				+ widerstand + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Calculator [leistung=" + leistung + ", spannung=" + spannung + ", strom=" + strom + ", widerstand="
+//				+ widerstand + "]";
+//	}
 
 	public void calculate() {
 		if (leistung != 0 && spannung != 0) {
 			strom = iAusPundU(leistung, spannung);
+			System.out.println("Strom (" + strom + ") wird aus Leistung " + leistung + " & Spannung " + spannung + " berechnet.");
 			widerstand = rAusPundI(leistung, spannung);
+			System.out.println("Widerstand (" + widerstand + ") wird aus Leistung " + leistung + " & Spannung " + spannung + " berechnet.");
+			System.out.println("______________________________________");
 		}else
 		if (leistung != 0 && strom != 0) {
 			spannung = uAusPundI(leistung, strom);

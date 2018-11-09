@@ -89,11 +89,11 @@ public class Main extends Application {
 						Double.parseDouble("0"+txSpannung.getText()),
 						Double.parseDouble("0"+txStrom.getText()),
 						Double.parseDouble("0"+txWiderstand.getText()));
-				System.out.print("Vorher:  ");
-				System.out.println(myCalculator.toString());
+//				System.out.print("Vorher:  ");
+//				System.out.println(myCalculator.toString());
 				myCalculator.calculate();
-				System.out.print("Nachher: ");
-				System.out.println(myCalculator.toString());
+//				System.out.print("Nachher: ");
+//				System.out.println(myCalculator.toString());
 				
 				txLeistung.setText((Double.toString(Math.round(myCalculator.getLeistung()*1000.0)/1000.0)));
 				txSpannung.setText(Double.toString(Math.round(myCalculator.getSpannung()*1000.0)/1000.0));
