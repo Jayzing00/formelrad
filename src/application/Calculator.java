@@ -91,7 +91,10 @@ public class Calculator {
 		}else
 		if (spannung != 0 && widerstand != 0) {
 			leistung = pAusUundR(spannung, widerstand);
+			System.out.println("Leistung (" + leistung + ") wird aus Spannung " + spannung + " & Widerstand " + widerstand + " berechnet.");
 			strom = iAusUundR(spannung, widerstand);
+			System.out.println("Strom (" + strom + ") wird aus Spannung " + spannung + " & Widerstand " + widerstand + " berechnet.");
+			System.out.println("______________________________________");
 		}else
 		if (widerstand != 0 && strom != 0) {
 			leistung = pAusRundI(widerstand, strom);
