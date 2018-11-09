@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 
 /**
  * Formelrad Application
+ * 
  * @version 13.09.2018
  */
 public class Main extends Application {
@@ -77,29 +78,75 @@ public class Main extends Application {
 			btnBerechnen.relocate(100, 445);
 			btnBerechnen.setText("Berechnen");
 			root.getChildren().add(btnBerechnen);
-			
+
 			Label lblWarning = new Label("");
 			lblWarning.relocate(10, 485);
 			lblWarning.setFont(Font.font(15));
 			root.getChildren().add(lblWarning);
-			
+
 			btnBerechnen.setOnAction(e -> {
-				Calculator myCalculator = new Calculator(
-						Double.parseDouble("0"+txLeistung.getText()),
-						Double.parseDouble("0"+txSpannung.getText()),
-						Double.parseDouble("0"+txStrom.getText()),
-						Double.parseDouble("0"+txWiderstand.getText()));
+				Calculator myCalculator = new Calculator(Double.parseDouble("0" + txLeistung.getText()),
+						Double.parseDouble("0" + txSpannung.getText()), Double.parseDouble("0" + txStrom.getText()),
+						Double.parseDouble("0" + txWiderstand.getText()));
 				System.out.print("Vorher:  ");
 				System.out.println(myCalculator.toString());
 				myCalculator.calculate();
 				System.out.print("Nachher: ");
 				System.out.println(myCalculator.toString());
-				
-				txLeistung.setText((Double.toString(Math.round(myCalculator.getLeistung()*1000.0)/1000.0)));
-				txSpannung.setText(Double.toString(Math.round(myCalculator.getSpannung()*1000.0)/1000.0));
-				txStrom.setText(Double.toString(Math.round(myCalculator.getStrom()*1000.0)/1000.0));
-				txWiderstand.setText(Double.toString(Math.round(myCalculator.getWiderstand()*1000.0)/1000.0));
-				lblWarning.setText(myCalculator.getWarning());
+
+				if (myCalculator.getWarning().equals("")) {
+					double leistung = myCalculator.getLeistung();
+					double spannung = myCalculator.getSpannung();
+					double strom = myCalculator.getStrom();
+					double widerstand = myCalculator.getWiderstand();
+					if (leistung < 0) {
+						txLeistung.setStyle("-fx-text-inner-color: red;");
+						leistung *= -1;
+					}else {
+						txLeistung.setStyle("-fx-text-inner-color: black;");
+					}
+					txLeistung.setText((Double.toString(Math.round(leistung * 1000.0) / 1000.0)));
+					if (spannung < 0) {
+						txSpannung.setStyle("-fx-text-inner-color: red;");
+						spannung *= -1;
+					}else {
+						txSpannung.setStyle("-fx-text-inner-color: black;");
+					}
+					txSpannung.setText(Double.toString(Math.round(spannung * 1000.0) / 1000.0));
+					if (strom < 0) {
+						txStrom.setStyle("-fx-text-inner-color: red;");
+						strom *= -1;
+					}else {
+						txStrom.setStyle("-fx-text-inner-color: black;");
+					}
+					txStrom.setText(Double.toString(Math.round(strom * 1000.0) / 1000.0));
+					if (widerstand < 0) {
+						txWiderstand.setStyle("-fx-text-inner-color: red;");
+						widerstand *= -1;
+					}else {
+						txWiderstand.setStyle("-fx-text-inner-color: black;");
+					}
+					txWiderstand.setText(Double.toString(Math.round(widerstand * 1000.0) / 1000.0));
+
+					lblWarning.setStyle("-fx-text-color: red;");
+					lblWarning.setText(myCalculator.getWarning());
+				}else {
+					lblWarning.setStyle("-fx-text-color: red;");
+					lblWarning.setText(myCalculator.getWarning());
+
+					if (!txLeistung.getText().equals("")) {
+						txLeistung.setStyle("-fx-text-inner-color: red;");
+					}
+					if (!txSpannung.getText().equals("")) {
+						txSpannung.setStyle("-fx-text-inner-color: red;");
+					}
+					if (!txStrom.getText().equals("")) {
+						txStrom.setStyle("-fx-text-inner-color: red;");
+					}
+					if (!txWiderstand.getText().equals("")) {
+						txWiderstand.setStyle("-fx-text-inner-color: red;");
+					}
+				}
 			});
 
 			Scene scene = new Scene(root, 330, 530);
