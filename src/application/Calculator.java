@@ -54,31 +54,73 @@ public class Calculator {
 		return widerstand;
 	}
 
-	@Override
-	public String toString() {
-		return "Calculator [leistung=" + leistung + ", spannung=" + spannung + ", strom=" + strom + ", widerstand="
-				+ widerstand + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Calculator [leistung=" + leistung + ", spannung=" + spannung + ", strom=" + strom + ", widerstand="
+//				+ widerstand + "]";
+//	}
 
 	public void calculate() {
 		if (leistung != 0 && spannung != 0) {
-			strom = iAusPundU(leistung, spannung) * -1;
-			widerstand = rAusPundI(leistung, spannung) * -1;
+			strom = iAusPundU(leistung, spannung);
+			System.out.println(
+					"Strom (" + strom + ") wird aus Leistung " + leistung + " & Spannung " + spannung + " berechnet.");
+			widerstand = rAusPundI(leistung, spannung);
+			System.out.println("Widerstand (" + widerstand + ") wird aus Leistung " + leistung + " & Spannung "
+					+ spannung + " berechnet.");
+			System.out.println("______________________________________");
+			strom *= -1;
+			widerstand *= -1;
 		} else if (leistung != 0 && strom != 0) {
-			spannung = uAusPundI(leistung, strom) * -1;
-			widerstand = rAusPundI(leistung, strom) * -1;
+			spannung = uAusPundI(leistung, strom);
+			System.out.println(
+					"Spannung (" + spannung + ") wird aus Leistung " + leistung + " & Strom " + strom + " berechnet.");
+			widerstand = rAusPundI(leistung, strom);
+			System.out.println("Widerstand (" + widerstand + ") wird aus Leistung " + leistung + " & Strom " + strom
+					+ " berechnet.");
+			System.out.println("______________________________________");
+			spannung *= -1;
+			widerstand *= -1;
 		} else if (leistung != 0 && widerstand != 0) {
-			spannung = uAusPundR(leistung, widerstand) * -1;
-			strom = iAusPundR(leistung, widerstand) * -1;
+			spannung = uAusPundR(leistung, widerstand);
+			System.out.println("Spannung (" + spannung + ") wird aus Leistung " + leistung + " & Widerstand "
+					+ widerstand + " berechnet.");
+			strom = iAusPundR(leistung, widerstand);
+			System.out.println("Strom (" + strom + ") wird aus Leistung " + leistung + " & Widerstand " + widerstand
+					+ " berechnet.");
+			System.out.println("______________________________________");
+			spannung *= -1;
+			strom *= -1;
 		} else if (spannung != 0 && strom != 0) {
-			leistung = pAusUundI(spannung, strom) * -1;
-			widerstand = rAusUundI(spannung, strom) * -1;
+			leistung = pAusUundI(spannung, strom);
+			System.out.println(
+					"Leistung (" + leistung + ") wird aus Spannung " + spannung + " & Strom " + strom + " berechnet.");
+			widerstand = rAusUundI(spannung, strom);
+			System.out.println("Widerstand (" + widerstand + ") wird aus Spannung " + spannung + " & Strom " + strom
+					+ " berechnet.");
+			System.out.println("______________________________________");
+			leistung *= -1;
+			widerstand *= -1;
 		} else if (spannung != 0 && widerstand != 0) {
-			leistung = pAusUundR(spannung, widerstand) * -1;
-			strom = iAusUundR(spannung, widerstand) * -1;
+			leistung = pAusUundR(spannung, widerstand);
+			System.out.println("Leistung (" + leistung + ") wird aus Spannung " + spannung + " & Widerstand "
+					+ widerstand + " berechnet.");
+			strom = iAusUundR(spannung, widerstand);
+			System.out.println("Strom (" + strom + ") wird aus Spannung " + spannung + " & Widerstand " + widerstand
+					+ " berechnet.");
+			System.out.println("______________________________________");
+			leistung *= -1;
+			strom *= -1;
 		} else if (widerstand != 0 && strom != 0) {
-			leistung = pAusRundI(widerstand, strom) * -1;
-			spannung = uAusRundI(widerstand, strom) * -1;
+			leistung = pAusRundI(widerstand, strom);
+			System.out.println("Leistung (" + leistung + ") wird aus Widerstand " + widerstand + " & Strom " + strom
+					+ " berechnet.");
+			spannung = uAusRundI(widerstand, strom);
+			System.out.println("Spannung (" + spannung + ") wird aus Widerstand " + widerstand + " & Strom " + strom
+					+ " berechnet.");
+			System.out.println("______________________________________");
+			leistung *= -1;
+			spannung *= -1;
 		}
 
 	}

@@ -85,15 +85,11 @@ public class Main extends Application {
 			root.getChildren().add(lblWarning);
 
 			btnBerechnen.setOnAction(e -> {
+
 				Calculator myCalculator = new Calculator(Double.parseDouble("0" + txLeistung.getText()),
 						Double.parseDouble("0" + txSpannung.getText()), Double.parseDouble("0" + txStrom.getText()),
 						Double.parseDouble("0" + txWiderstand.getText()));
-				System.out.print("Vorher:  ");
-				System.out.println(myCalculator.toString());
 				myCalculator.calculate();
-				System.out.print("Nachher: ");
-				System.out.println(myCalculator.toString());
-
 				if (myCalculator.getWarning().equals("")) {
 					double leistung = myCalculator.getLeistung();
 					double spannung = myCalculator.getSpannung();
@@ -147,6 +143,7 @@ public class Main extends Application {
 						txWiderstand.setStyle("-fx-text-inner-color: red;");
 					}
 				}
+
 			});
 
 			Scene scene = new Scene(root, 330, 530);
