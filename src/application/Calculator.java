@@ -70,7 +70,10 @@ public class Calculator {
 		}else
 		if (leistung != 0 && strom != 0) {
 			spannung = uAusPundI(leistung, strom);
+			System.out.println("Spannung (" + spannung + ") wird aus Leistung " + leistung + " & Strom " + strom + " berechnet.");
 			widerstand = rAusPundI(leistung, strom);
+			System.out.println("Widerstand (" + widerstand + ") wird aus Leistung " + leistung + " & Strom " + strom + " berechnet.");
+			System.out.println("______________________________________");
 		}else
 		if (leistung != 0 && widerstand != 0) {
 			spannung = uAusPundR(leistung, widerstand);
