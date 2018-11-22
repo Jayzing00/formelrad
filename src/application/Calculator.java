@@ -15,14 +15,15 @@ public class Calculator {
 	public Calculator(double leistung, double spannung, double strom, double widerstand) {
 		super();
 		int cnt = 0;
-		if (leistung != 0)
+		if (leistung > 0)
 			cnt++;
-		if (spannung != 0)
+		if (spannung > 0)
 			cnt++;
-		if (strom != 0)
+		if (strom > 0)
 			cnt++;
-		if (widerstand != 0)
+		if (widerstand > 0)
 			cnt++;
+
 		if (cnt < 2)
 			warning = "nicht genug Werte";
 		else if (cnt > 2)
@@ -30,12 +31,54 @@ public class Calculator {
 		else
 			warning = "";
 
+		if (leistung == -1) {
+			warning = "Leisung nicht korrekt abgefüllt";
+			leistung = 0;
+		}
+		if (spannung == -1) {
+			warning = "Spannung nicht korrekt abgefüllt";
+			spannung = 0;
+		}
+		if (strom == -1) {
+			warning = "Strom nicht korrekt abgefüllt";
+			strom = 0;
+		}
+		if (widerstand == -1) {
+			warning = "Wiederstand nicht korrekt abgefüllt";
+			widerstand = 0;
+		}
+
 		if (warning.equals("")) {
 			this.leistung = leistung;
 			this.spannung = spannung;
 			this.strom = strom;
 			this.widerstand = widerstand;
 		}
+	}
+
+	public Calculator(String leistung, String spannung, String strom, String wiederstand) {
+		this(parseDouble(leistung), parseDouble(spannung), parseDouble(strom), parseDouble(wiederstand));
+	}
+
+	private static double parseDouble(String s) {
+		char[] in = s.toCharArray();
+		double out = 0;
+		int cntPoint = 0;
+		if (s.length() > 0) {
+			boolean isNummeric = Character.isDigit(in[0]) || in[0] == '-';
+
+			for (int i = 1; i < in.length; i++) {
+				if (!(in[i] == '.' && cntPoint == 0)) // for the snd point it isn't ok anymore
+					isNummeric = isNummeric && Character.isDigit(in[i]);
+				else
+					cntPoint++;
+			}
+			if (isNummeric) // the String s is a valid double.
+				out = Double.parseDouble(s);
+			else
+				out = -1;
+		}
+		return out;
 	}
 
 	public double getLeistung() {
