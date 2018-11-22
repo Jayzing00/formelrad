@@ -38,6 +38,32 @@ public class Calculator {
 		}
 	}
 
+	public Calculator(String leistung, String spannung, String strom, String wiederstand) {
+		// check each field if numeric && parse to double if ok
+		// then call other constructor claculator (double,dobule,dobule,dobule)
+		double p = parseDouble(leistung);
+		double u = parseDouble(spannung);
+		double i = parseDouble(strom);
+		double r = parseDouble(wiederstand);
+	}
+
+	private double parseDouble(String s) {
+		char[] in = s.toCharArray();
+		double out = -1;
+		int cntPoint = 0;
+		boolean isNummeric = Character.isDigit(in[0]) || in[0] == '-';
+
+		for (int i = 1; i < in.length; i++) {
+			if (!(in[i] == '.' && cntPoint == 0)) // for the snd point it isn't ok anymore
+				isNummeric = isNummeric && Character.isDigit(in[i]);
+			else
+				cntPoint++;
+		}
+		if (isNummeric) // the String s is a valid double.
+			out = Double.parseDouble(s);
+		return out;
+	}
+
 	public double getLeistung() {
 		return leistung;
 	}
