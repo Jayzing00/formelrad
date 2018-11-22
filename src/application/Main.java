@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 
 /**
  * Formelrad Application
+ * 
  * @version 13.09.2018
  */
 public class Main extends Application {
@@ -77,26 +78,73 @@ public class Main extends Application {
 			btnBerechnen.relocate(100, 445);
 			btnBerechnen.setText("Berechnen");
 			root.getChildren().add(btnBerechnen);
-			
+
+			Label lblWarning = new Label("");
+			lblWarning.relocate(10, 485);
+			lblWarning.setFont(Font.font(15));
+			root.getChildren().add(lblWarning);
+
 			btnBerechnen.setOnAction(e -> {
-				Calculator myCalculator = new Calculator(
-						Double.parseDouble(txLeistung.getText()),
-						Double.parseDouble(txSpannung.getText()),
-						Double.parseDouble(txStrom.getText()),
-						Double.parseDouble(txWiderstand.getText()));
-				System.out.print("Vorher:  ");
-				System.out.println(myCalculator.toString());
+				Calculator myCalculator = new Calculator("0" + txLeistung.getText(), "0" + txSpannung.getText(),
+						"0" + txStrom.getText(), "0" + txWiderstand.getText());
 				myCalculator.calculate();
-				System.out.print("Nachher: ");
-				System.out.println(myCalculator.toString());
-					
-				txLeistung.setText(Double.toString(myCalculator.getLeistung()));
-				txSpannung.setText(Double.toString(myCalculator.getSpannung()));
-				txStrom.setText(Double.toString(myCalculator.getStrom()));
-				txWiderstand.setText(Double.toString(myCalculator.getWiderstand()));
+				if (myCalculator.getWarning().equals("")) {
+					double leistung = myCalculator.getLeistung();
+					double spannung = myCalculator.getSpannung();
+					double strom = myCalculator.getStrom();
+					double widerstand = myCalculator.getWiderstand();
+					if (leistung < 0) {
+						txLeistung.setStyle("-fx-text-inner-color: red;");
+						leistung *= -1;
+					} else {
+						txLeistung.setStyle("-fx-text-inner-color: black;");
+					}
+					txLeistung.setText((Double.toString(Math.round(leistung * 1000.0) / 1000.0)));
+					if (spannung < 0) {
+						txSpannung.setStyle("-fx-text-inner-color: red;");
+						spannung *= -1;
+					} else {
+						txSpannung.setStyle("-fx-text-inner-color: black;");
+					}
+					txSpannung.setText(Double.toString(Math.round(spannung * 1000.0) / 1000.0));
+					if (strom < 0) {
+						txStrom.setStyle("-fx-text-inner-color: red;");
+						strom *= -1;
+					} else {
+						txStrom.setStyle("-fx-text-inner-color: black;");
+					}
+					txStrom.setText(Double.toString(Math.round(strom * 1000.0) / 1000.0));
+					if (widerstand < 0) {
+						txWiderstand.setStyle("-fx-text-inner-color: red;");
+						widerstand *= -1;
+					} else {
+						txWiderstand.setStyle("-fx-text-inner-color: black;");
+					}
+					txWiderstand.setText(Double.toString(Math.round(widerstand * 1000.0) / 1000.0));
+
+					lblWarning.setStyle("-fx-text-color: red;");
+					lblWarning.setText(myCalculator.getWarning());
+				} else {
+					lblWarning.setStyle("-fx-text-color: red;");
+					lblWarning.setText(myCalculator.getWarning());
+
+					if (!txLeistung.getText().equals("")) {
+						txLeistung.setStyle("-fx-text-inner-color: red;");
+					}
+					if (!txSpannung.getText().equals("")) {
+						txSpannung.setStyle("-fx-text-inner-color: red;");
+					}
+					if (!txStrom.getText().equals("")) {
+						txStrom.setStyle("-fx-text-inner-color: red;");
+					}
+					if (!txWiderstand.getText().equals("")) {
+						txWiderstand.setStyle("-fx-text-inner-color: red;");
+					}
+				}
+
 			});
 
-			Scene scene = new Scene(root, 330, 490);
+			Scene scene = new Scene(root, 330, 530);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Formelrad");
