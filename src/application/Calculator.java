@@ -15,20 +15,38 @@ public class Calculator {
 	public Calculator(double leistung, double spannung, double strom, double widerstand) {
 		super();
 		int cnt = 0;
-		if (leistung != 0)
+		if (leistung > 0)
 			cnt++;
-		if (spannung != 0)
+		if (spannung > 0)
 			cnt++;
-		if (strom != 0)
+		if (strom > 0)
 			cnt++;
-		if (widerstand != 0)
+		if (widerstand > 0)
 			cnt++;
+
 		if (cnt < 2)
 			warning = "nicht genug Werte";
 		else if (cnt > 2)
 			warning = "zu viele Werte eingegeben";
 		else
 			warning = "";
+
+		if (leistung == -1) {
+			warning = "Leisung nicht korrekt abgefüllt";
+			leistung = 0;
+		}
+		if (spannung == -1) {
+			warning = "Spannung nicht korrekt abgefüllt";
+			spannung = 0;
+		}
+		if (strom == -1) {
+			warning = "Strom nicht korrekt abgefüllt";
+			strom = 0;
+		}
+		if (widerstand == -1) {
+			warning = "Wiederstand nicht korrekt abgefüllt";
+			widerstand = 0;
+		}
 
 		if (warning.equals("")) {
 			this.leistung = leistung;
@@ -39,28 +57,27 @@ public class Calculator {
 	}
 
 	public Calculator(String leistung, String spannung, String strom, String wiederstand) {
-		// check each field if numeric && parse to double if ok
-		// then call other constructor claculator (double,dobule,dobule,dobule)
-		double p = parseDouble(leistung);
-		double u = parseDouble(spannung);
-		double i = parseDouble(strom);
-		double r = parseDouble(wiederstand);
+		this(parseDouble(leistung), parseDouble(spannung), parseDouble(strom), parseDouble(wiederstand));
 	}
 
-	private double parseDouble(String s) {
+	private static double parseDouble(String s) {
 		char[] in = s.toCharArray();
-		double out = -1;
+		double out = 0;
 		int cntPoint = 0;
-		boolean isNummeric = Character.isDigit(in[0]) || in[0] == '-';
+		if (s.length() > 0) {
+			boolean isNummeric = Character.isDigit(in[0]) || in[0] == '-';
 
-		for (int i = 1; i < in.length; i++) {
-			if (!(in[i] == '.' && cntPoint == 0)) // for the snd point it isn't ok anymore
-				isNummeric = isNummeric && Character.isDigit(in[i]);
+			for (int i = 1; i < in.length; i++) {
+				if (!(in[i] == '.' && cntPoint == 0)) // for the snd point it isn't ok anymore
+					isNummeric = isNummeric && Character.isDigit(in[i]);
+				else
+					cntPoint++;
+			}
+			if (isNummeric) // the String s is a valid double.
+				out = Double.parseDouble(s);
 			else
-				cntPoint++;
+				out = -1;
 		}
-		if (isNummeric) // the String s is a valid double.
-			out = Double.parseDouble(s);
 		return out;
 	}
 

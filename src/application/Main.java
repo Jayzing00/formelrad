@@ -85,10 +85,8 @@ public class Main extends Application {
 			root.getChildren().add(lblWarning);
 
 			btnBerechnen.setOnAction(e -> {
-
-				Calculator myCalculator = new Calculator(Double.parseDouble("0" + txLeistung.getText()),
-						Double.parseDouble("0" + txSpannung.getText()), Double.parseDouble("0" + txStrom.getText()),
-						Double.parseDouble("0" + txWiderstand.getText()));
+				Calculator myCalculator = new Calculator("0" + txLeistung.getText(), "0" + txSpannung.getText(),
+						"0" + txStrom.getText(), "0" + txWiderstand.getText());
 				myCalculator.calculate();
 				if (myCalculator.getWarning().equals("")) {
 					double leistung = myCalculator.getLeistung();
@@ -98,35 +96,35 @@ public class Main extends Application {
 					if (leistung < 0) {
 						txLeistung.setStyle("-fx-text-inner-color: red;");
 						leistung *= -1;
-					}else {
+					} else {
 						txLeistung.setStyle("-fx-text-inner-color: black;");
 					}
 					txLeistung.setText((Double.toString(Math.round(leistung * 1000.0) / 1000.0)));
 					if (spannung < 0) {
 						txSpannung.setStyle("-fx-text-inner-color: red;");
 						spannung *= -1;
-					}else {
+					} else {
 						txSpannung.setStyle("-fx-text-inner-color: black;");
 					}
 					txSpannung.setText(Double.toString(Math.round(spannung * 1000.0) / 1000.0));
 					if (strom < 0) {
 						txStrom.setStyle("-fx-text-inner-color: red;");
 						strom *= -1;
-					}else {
+					} else {
 						txStrom.setStyle("-fx-text-inner-color: black;");
 					}
 					txStrom.setText(Double.toString(Math.round(strom * 1000.0) / 1000.0));
 					if (widerstand < 0) {
 						txWiderstand.setStyle("-fx-text-inner-color: red;");
 						widerstand *= -1;
-					}else {
+					} else {
 						txWiderstand.setStyle("-fx-text-inner-color: black;");
 					}
 					txWiderstand.setText(Double.toString(Math.round(widerstand * 1000.0) / 1000.0));
 
 					lblWarning.setStyle("-fx-text-color: red;");
 					lblWarning.setText(myCalculator.getWarning());
-				}else {
+				} else {
 					lblWarning.setStyle("-fx-text-color: red;");
 					lblWarning.setText(myCalculator.getWarning());
 
